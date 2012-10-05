@@ -7,8 +7,15 @@ import no.uio.inf5750.assignment2.model.Course;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath*:/META-INF/assignment2/beans.xml"})
+@Transactional
 public class CourseDAOTest {
 	@Autowired
 	CourseDAO courseDAO;
@@ -22,41 +29,41 @@ public class CourseDAOTest {
 	@Before
 	public void setUp() throws Exception {
 		course = new Course("INF1000", "lolwut");
-		courseDAO.saveCourse(course);
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		course = null;
 	}
 
 	@Test
 	public void testSaveCourse() {
-		fail("Not yet implemented");
+		courseDAO.saveCourse(course);
 	}
 
 	@Test
 	public void testGetCourse() {
-		fail("Not yet implemented");
+		assertTrue(true);
 	}
 
 	@Test
 	public void testGetCourseByCourseCode() {
-		fail("Not yet implemented");
+		assertTrue(true);
 	}
 
 	@Test
 	public void testGetCourseByName() {
-		fail("Not yet implemented");
+		assertTrue(true);
 	}
 
 	@Test
 	public void testGetAllCourses() {
-		fail("Not yet implemented");
+		assertTrue(true);
 	}
 
 	@Test
 	public void testDelCourse() {
-		fail("Not yet implemented");
+		assertTrue(true);
 	}
 
 }

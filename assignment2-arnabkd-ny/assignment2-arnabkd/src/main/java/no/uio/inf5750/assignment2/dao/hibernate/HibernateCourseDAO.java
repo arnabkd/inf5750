@@ -21,11 +21,6 @@ public class HibernateCourseDAO implements CourseDAO{
 
 	SessionFactory sessionFactory;
 	
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -35,7 +30,8 @@ public class HibernateCourseDAO implements CourseDAO{
 	public void delCourse(Course course) {
 		System.out.println("delete course");
 		Session session = sessionFactory.getCurrentSession();
-		session.delete(course);
+		if(session.get(Course.class, course.getId()) != null)
+			session.delete(course);
 	}
 
 	@Override
@@ -76,14 +72,8 @@ public class HibernateCourseDAO implements CourseDAO{
 	@Override
 	public int saveCourse(Course course) {
 		System.out.println("saveCourse ");
-		System.out.println("course name " + course.getName() );
-		System.out.println("course code " + course.getCourseCode());		
-		
-        Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(course);
-
-        return 0;
-
+	    Session session = sessionFactory.getCurrentSession();
+        return (Integer) session.save(course);
 	}
 
 }
