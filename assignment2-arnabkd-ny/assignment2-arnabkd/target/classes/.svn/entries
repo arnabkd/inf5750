@@ -2,13 +2,13 @@
 
 dir
 13
-https://svn.ifi.uio.no/repos/users/arnabkd-inf5750/assignment2-arnabkd/assignment2-arnabkd/src/main/java
+https://svn.ifi.uio.no/repos/users/arnabkd-inf5750/assignment2-arnabkd/assignment2-arnabkd/src/main/resources
 https://svn.ifi.uio.no/repos/users/arnabkd-inf5750
 
 
 
-2012-10-05T12:45:48.591209Z
-9
+2012-10-05T12:42:27.587275Z
+6
 arnabkd
 
 
@@ -26,6 +26,149 @@ arnabkd
 
 e75e2d17-e1e1-4b62-99ea-e2dec1780302
 
-no
+Degree.hbm.xml
+file
+
+
+
+
+2012-10-05T11:57:59.424167Z
+9e4a17b7cd0fdd2be4191d37357e4cc5
+2012-10-05T12:42:27.587275Z
+6
+arnabkd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+650
+
+META-INF
 dir
+
+Course.hbm.xml
+file
+
+
+
+
+2012-10-05T12:10:21.211429Z
+97119f5db36e3fa0a800602801907982
+2012-10-05T12:42:27.587275Z
+6
+arnabkd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+663
+
+Student.hbm.xml
+file
+
+
+
+
+2012-10-05T11:58:06.937625Z
+7efd2b1575f87de19e2ad0ec22d5e520
+2012-10-05T12:42:27.587275Z
+6
+arnabkd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+822
+
+log4j.properties
+file
+0
+
+
+add
+
+hibernate.cfg.xml
+file
+
+
+
+
+2012-10-04T11:52:04.005035Z
+d31c9cdcea221c0984a9e1d2cc70f0c9
+2012-10-04T18:30:20.474651Z
+5
+arnabkd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1435
 

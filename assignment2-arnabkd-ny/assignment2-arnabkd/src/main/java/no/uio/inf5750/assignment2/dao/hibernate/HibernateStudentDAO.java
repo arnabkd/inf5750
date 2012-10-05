@@ -9,11 +9,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import no.uio.inf5750.assignment2.dao.StudentDAO;
 import no.uio.inf5750.assignment2.dao.hibernate.util.HibernateUtil;
 import no.uio.inf5750.assignment2.model.Student;
-
 
 public class HibernateStudentDAO implements StudentDAO{
 
@@ -37,51 +37,25 @@ public class HibernateStudentDAO implements StudentDAO{
 	}
 
 	@Override
-	public Student getStudent(int arg0) {
-		Collection<Student> allStudents = getAllStudents();
-		Student match = null;
-		
-		for (Student student: allStudents){
-			if (student.getId() == arg0) {
-				match = student;
-				break; //we found the student we were looking for
-			}
-		}
-		
-		return match;
+	public Student getStudent(int id) {
+        Session session = sessionFactory.getCurrentSession();        
+        Criteria criteria = session.createCriteria( Student.class );        
+        criteria.add( Restrictions.eq("id", id));
+        return (Student) criteria.uniqueResult();
 	}
 
 	@Override
 	public Student getStudentByName(String name) {
-		/*Collection<Student> allStudents = getAllStudents();
-		Student match = null;
-		
-		for (Student student: allStudents){
-			if (student.getName().equals(arg0)) {
-				match = student;
-				break; //we found the student we were looking for
-			}
-		}
-		
-		return match; */
-        Session session = sessionFactory.getCurrentSession();
-        
-        Criteria criteria = session.createCriteria( Student.class );
-        
-        criteria.add( Restrictions.eq( "name", name ) );
-
+        Session session = sessionFactory.getCurrentSession();        
+        Criteria criteria = session.createCriteria( Student.class );        
+        criteria.add( Restrictions.eq("name", name));
         return (Student) criteria.uniqueResult();
 	}
 
 	@Override
 	public int saveStudent(Student student) {
         Session session = sessionFactory.getCurrentSession();        
-        //Transaction transaction = session.beginTransaction();        
-        int id = (Integer) session.save(student.getId());        
-        //transaction.commit(); // No error handling considered
-        
-        
-        return id;
+        return (Integer) session.save(student);
 	}
 
 	@Override

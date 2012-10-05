@@ -1,5 +1,29 @@
 K 25
 svn:wc:ra_dav:version-url
-V 93
-/repos/users/arnabkd-inf5750/!svn/ver/9/assignment2-arnabkd/assignment2-arnabkd/src/main/java
+V 98
+/repos/users/arnabkd-inf5750/!svn/ver/6/assignment2-arnabkd/assignment2-arnabkd/src/main/resources
+END
+Degree.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/users/arnabkd-inf5750/!svn/ver/6/assignment2-arnabkd/assignment2-arnabkd/src/main/resources/Degree.hbm.xml
+END
+Course.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/users/arnabkd-inf5750/!svn/ver/6/assignment2-arnabkd/assignment2-arnabkd/src/main/resources/Course.hbm.xml
+END
+Student.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/users/arnabkd-inf5750/!svn/ver/6/assignment2-arnabkd/assignment2-arnabkd/src/main/resources/Student.hbm.xml
+END
+hibernate.cfg.xml
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repos/users/arnabkd-inf5750/!svn/ver/5/assignment2-arnabkd/assignment2-arnabkd/src/main/resources/hibernate.cfg.xml
 END

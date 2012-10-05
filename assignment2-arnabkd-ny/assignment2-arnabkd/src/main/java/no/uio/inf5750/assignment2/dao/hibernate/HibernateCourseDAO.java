@@ -16,6 +16,7 @@ import no.uio.inf5750.assignment2.model.Course;
 import no.uio.inf5750.assignment2.model.Degree;
 import no.uio.inf5750.assignment2.model.Student;
 
+
 public class HibernateCourseDAO implements CourseDAO{
 
 	SessionFactory sessionFactory;
@@ -67,17 +68,22 @@ public class HibernateCourseDAO implements CourseDAO{
 		System.out.println("get course by name");
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Course.class);
-		criteria.add(Restrictions.eq("courseName", courseName));
+		criteria.add(Restrictions.eq("name", courseName));
 		
 		return (Course) criteria.uniqueResult();
 	}
 
 	@Override
 	public int saveCourse(Course course) {
-		System.out.println("saveCourseaisdnasoidnaosidnaoisndasiodn");
-        //Session session = sessionFactory.getCurrentSession();
-        //return ((Integer) session.save(course));
-		return 1;
+		System.out.println("saveCourse ");
+		System.out.println("course name " + course.getName() );
+		System.out.println("course code " + course.getCourseCode());		
+		
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(course);
+
+        return 0;
+
 	}
 
 }

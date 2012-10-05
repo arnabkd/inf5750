@@ -2,17 +2,20 @@ package no.uio.inf5750.assignment2.dao.hibernate;
 
 import java.util.Collection;
 
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import no.uio.inf5750.assignment2.dao.DegreeDAO;
 import no.uio.inf5750.assignment2.dao.hibernate.util.HibernateUtil;
 import no.uio.inf5750.assignment2.model.Course;
 import no.uio.inf5750.assignment2.model.Degree;
 import no.uio.inf5750.assignment2.model.Student;
+
 
 public class HibernateDegreeDAO implements DegreeDAO {
 
