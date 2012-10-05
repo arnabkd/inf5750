@@ -1,0 +1,180 @@
+package no.uio.inf5750.assignment2.service;
+
+import java.util.Collection;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import no.uio.inf5750.assignment2.dao.CourseDAO;
+import no.uio.inf5750.assignment2.dao.DegreeDAO;
+import no.uio.inf5750.assignment2.dao.StudentDAO;
+import no.uio.inf5750.assignment2.dao.hibernate.HibernateCourseDAO;
+import no.uio.inf5750.assignment2.dao.hibernate.HibernateDegreeDAO;
+import no.uio.inf5750.assignment2.dao.hibernate.HibernateStudentDAO;
+import no.uio.inf5750.assignment2.model.Course;
+import no.uio.inf5750.assignment2.model.Degree;
+import no.uio.inf5750.assignment2.model.Student;
+
+public class DefaultStudentSystem implements StudentSystem {
+	
+	@Autowired
+	CourseDAO courseDAO;
+	
+	@Autowired
+	StudentDAO studentDAO;
+	
+	@Autowired
+	DegreeDAO degreeDAO;
+	
+	@Override
+	public void addAttendantToCourse(int courseID, int studentID) {
+		Course course = courseDAO.getCourse(courseID);
+		Set<Student> attendants= course.getAttendants();
+		attendants.add(studentDAO.getStudent(studentID));
+		course.setAttendants(attendants);
+	}
+
+	@Override
+	public int addCourse(String arg0, String arg1) {
+		return courseDAO.saveCourse(new Course(arg0, arg1));
+	}
+
+	@Override
+	public int addDegree(String type) {
+		return degreeDAO.saveDegree(new Degree(type));
+	}
+
+	@Override
+	public void addDegreeToStudent(int studentId, int degreeId) {
+		Student student = studentDAO.getStudent(studentId);
+		Set<Degree> degrees = student.getDegrees();
+		degrees.add(degreeDAO.getDegree(degreeId));
+		student.setDegrees(degrees);
+	}
+
+	@Override
+	public void addRequiredCourseToDegree(int degreeId, int courseId) {
+		Course course = courseDAO.getCourse(courseId);
+		Degree degree = degreeDAO.getDegree(degreeId);
+		
+		Set<Course> requiredCourses = degree.getRequiredCourses();
+		requiredCourses.add(course);
+		
+		degree.setRequiredCourses(requiredCourses);
+	}
+
+	@Override
+	public int addStudent(String name) {
+		Student student = new Student(name);
+		System.out.println("legger til student");
+		studentDAO.saveStudent(new Student(name));
+		return student.getId();
+	}
+
+	@Override
+	public void delCourse(int arg0) {
+		courseDAO.delCourse(courseDAO.getCourse(arg0));
+	}
+
+	@Override
+	public void delDegree(int arg0) {
+		degreeDAO.delDegree(degreeDAO.getDegree(arg0));
+	}
+
+	@Override
+	public void delStudent(int arg0) {
+		studentDAO.delStudent(studentDAO.getStudent(arg0));		
+	}
+
+	@Override
+	public Collection<Course> getAllCourses() {
+		return courseDAO.getAllCourses();
+	}
+
+	@Override
+	public Collection<Degree> getAllDegrees() {
+		return degreeDAO.getAllDegrees();
+	}
+
+	@Override
+	public Collection<Student> getAllStudents() {
+		return studentDAO.getAllStudents();
+	}
+
+	@Override
+	public Course getCourse(int courseId) {
+		return courseDAO.getCourse(courseId);
+	}
+
+	@Override
+	public Course getCourseByCourseCode(String courseCode) {
+		return courseDAO.getCourseByCourseCode(courseCode);
+	}
+
+	@Override
+	public Course getCourseByName(String courseName) {
+		return courseDAO.getCourseByName(courseName);
+	}
+
+	@Override
+	public Degree getDegree(int id) {
+		return degreeDAO.getDegree(id);
+	}
+
+	@Override
+	public Degree getDegreeByType(String type) {
+		return degreeDAO.getDegreeByType(type);
+	}
+
+	@Override
+	public Student getStudent(int id) {
+		return studentDAO.getStudent(id);
+	}
+
+	@Override
+	public Student getStudentByName(String name) {
+		return studentDAO.getStudentByName(name);
+	}
+
+	@Override
+	public void removeAttendantFromCourse(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void removeDegreeFromStudent(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeRequiredCourseFromDegree(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean studentFulfillsDegreeRequirements(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void updateCourse(int arg0, String arg1, String arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateDegree(int arg0, String arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateStudent(int arg0, String arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  
+  <bean id="courseListChangeManager"
+    class="no.uio.inf5750.assignment2.gui.list.DefaultListChangeManager"/>
+  
+  <bean id="degreeListChangeManager"
+    class="no.uio.inf5750.assignment2.gui.list.DefaultListChangeManager"/>
+  
+  <bean id="studentListChangeManager"
+    class="no.uio.inf5750.assignment2.gui.list.DefaultListChangeManager"/>
+  
+  <bean id="internalFrameManager"
+    class="no.uio.inf5750.assignment2.gui.internalframe.DefaultInternalFrameManager">
+    <property name="service" ref="studentSystem"/>
+    <property name="dialogManager" ref="dialogManager"/>
+    <property name="courseListChangeManager" ref="courseListChangeManager"/>
+    <property name="degreeListChangeManager" ref="degreeListChangeManager"/>
+    <property name="studentListChangeManager" ref="studentListChangeManager"/>
+  </bean>
+  
+  <bean id="userInterface" class="no.uio.inf5750.assignment2.gui.MainWindow">
+    <property name="internalFrameManager" ref="internalFrameManager"/>
+    <property name="dialogManager" ref="dialogManager"/>
+  </bean>
+  
+  <bean id="dialogManager" class="no.uio.inf5750.assignment2.gui.dialog.DefaultDialogManager">
+    <property name="userInterface" ref="userInterface"/>
+    <property name="service" ref="studentSystem"/>
+  </bean>
+  
+</beans>

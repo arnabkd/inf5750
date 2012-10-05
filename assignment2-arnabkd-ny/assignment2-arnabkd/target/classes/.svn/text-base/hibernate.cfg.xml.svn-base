@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	
+  <session-factory>
+		
+    <!-- JDBC connection -->		   
+   
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost/event</property>
+    
+    <!-- <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql:eventmanager</property> -->
+    
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">admin</property> 
+		
+    <!-- SQL dialect -->
+		
+    <!-- <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property> -->
+    
+    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+    
+    <!-- Connection pool size -->
+		
+    <property name="hibernate.connection.pool_size">10</property>
+    
+    <!-- Database schema auto-generation behaviour -->
+		
+    <property name="hibernate.hbm2ddl.auto">create-drop</property>
+		
+    <!-- Mapping files -->
+		
+    <mapping resource="Student.hbm.xml"/>
+    <mapping resource="Course.hbm.xml"/>
+    <mapping resource="Degree.hbm.xml"/>
+		
+  </session-factory>
+	
+</hibernate-configuration>

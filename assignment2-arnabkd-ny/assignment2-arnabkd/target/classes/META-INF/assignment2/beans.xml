@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="studentDAO"
+		class="no.uio.inf5750.assignment2.dao.hibernate.HibernateStudentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="courseDAO"
+		class="no.uio.inf5750.assignment2.dao.hibernate.HibernateCourseDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="degreeDAO"
+		class="no.uio.inf5750.assignment2.dao.hibernate.HibernateDegreeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="studentSystem"
+		class="no.uio.inf5750.assignment2.service.impl.DefaultStudentSystem">
+		<property name="studentDAO">
+			<ref bean="studentDAO" />
+		</property>
+
+		<property name="courseDAO">
+			<ref bean="courseDAO" />
+		</property>
+
+		<property name="degreeDAO">
+			<ref bean="degreeDAO" />
+		</property>
+	</bean>
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="org.h2.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:h2:mem:eventmanager;DB_CLOSE_ON_EXIT=FALSE" />
+		<property name="user" value="sa" />
+		<property name="password" value="" />
+	</bean>
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>Course.hbm.xml</value>
+				<value>Degree.hbm.xml</value>
+				<value>Student.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+			</props>
+		</property>
+	</bean>
+
+
+</beans>
