@@ -43,8 +43,8 @@ public class DefaultStudentSystem implements StudentSystem {
 
 	@Override
 	public void addAttendantToCourse(int courseID, int studentID) {
-		//courseDAO.getCourse(courseID).getAttendants().add(studentDAO.getStudent(studentID));
-		//og andre veien
+		courseDAO.getCourse(courseID).getAttendants().add(studentDAO.getStudent(studentID));
+		studentDAO.getStudent(studentID).getCourses().add(courseDAO.getCourse(courseID));
 	}
 
 	@Override
@@ -54,35 +54,37 @@ public class DefaultStudentSystem implements StudentSystem {
 
 	@Override
 	public int addDegree(String type) {
-		return 0;
+		return degreeDAO.saveDegree(new Degree(type));
 	}
 
 	@Override
 	public void addDegreeToStudent(int studentId, int degreeId) {
+		studentDAO.getStudent(studentId).getDegrees().add(degreeDAO.getDegree(degreeId));
 	}
 
 	@Override
 	public void addRequiredCourseToDegree(int degreeId, int courseId) {
+		degreeDAO.getDegree(degreeId).getRequiredCourses().add(courseDAO.getCourse(courseId));
 	}
 
 	@Override
 	public int addStudent(String name) {
-		return 0;
+		return studentDAO.saveStudent(new Student(name));
 	}
 
 	@Override
 	public void delCourse(int courseId) {
-		
+		courseDAO.delCourse(courseDAO.getCourse(courseId));
 	}
 
 	@Override
 	public void delDegree(int degreeId) {
-		
+		degreeDAO.delDegree(degreeDAO.getDegree(degreeId));
 	}
 
 	@Override
 	public void delStudent(int studentId) {
-			
+		studentDAO.delStudent(studentDAO.getStudent(studentId));
 	}
 
 	@Override
@@ -92,12 +94,12 @@ public class DefaultStudentSystem implements StudentSystem {
 
 	@Override
 	public Collection<Degree> getAllDegrees() {
-		return null;
+		return degreeDAO.getAllDegrees();
 	}
 
 	@Override
 	public Collection<Student> getAllStudents() {
-		return null;
+		return studentDAO.getAllStudents();
 	}
 
 	@Override
@@ -117,52 +119,48 @@ public class DefaultStudentSystem implements StudentSystem {
 
 	@Override
 	public Degree getDegree(int id) {
-		return null;
+		return degreeDAO.getDegree(id);
 	}
 
 	@Override
 	public Degree getDegreeByType(String type) {
-		return null;
+		return degreeDAO.getDegreeByType(type);
 	}
 
 	@Override
 	public Student getStudent(int id) {
-		return null;
+		return studentDAO.getStudent(id);
 	}
 
 	@Override
 	public Student getStudentByName(String name) {
-		return null;
+		return studentDAO.getStudentByName(name);
 	}
 
 	@Override
-	public void removeAttendantFromCourse(int courseId, int studentId) {		
+	public void removeAttendantFromCourse(int courseId, int studentId) {
+		studentDAO.getStudent(studentId).getCourses().remove(courseDAO.getCourse(courseId));
+		courseDAO.getCourse(courseId).getAttendants().remove(studentDAO.getStudent(studentId));
 	}
 
 	@Override
 	public void removeDegreeFromStudent(int studentId, int degreeId) {
-
+		studentDAO.getStudent(studentId).getDegrees().remove(degreeDAO.getDegree(degreeId));
 	}
 
 	@Override
 	public void removeRequiredCourseFromDegree(int degreeId, int courseId) {
-
+		degreeDAO.getDegree(degreeId).getRequiredCourses().remove(courseDAO.getCourse(courseId));
 	}
 
 	@Override
 	public boolean studentFulfillsDegreeRequirements(int studentId, int degreeId) {
-		return false;
+		return studentDAO.getStudent(studentId).getCourses().containsAll(degreeDAO.getDegree(degreeId).getRequiredCourses());
 	}
 
 	@Override
 	public void updateCourse(int courseId, String courseCode, String courseName) {
-		Course course = getCourse(courseId);
-		
-		if (course == null) {
-			System.out.println("Course does not exist");
-			return;
-		}
-
+				
 	}
 
 	@Override

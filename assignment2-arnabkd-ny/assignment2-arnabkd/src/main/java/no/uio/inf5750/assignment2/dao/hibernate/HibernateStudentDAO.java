@@ -31,7 +31,7 @@ public class HibernateStudentDAO implements StudentDAO{
 
 	@Override
 	public Collection<Student> getAllStudents() {
-		Session session = HibernateUtil.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Student.class);
 		return (Collection<Student>) criteria.list();		
 	}

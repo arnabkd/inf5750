@@ -55,7 +55,6 @@ public class HibernateCourseDAO implements CourseDAO{
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Course.class);
 		criteria.add(Restrictions.eq("courseCode", courseCode));
-		
 		return (Course) criteria.uniqueResult();
 	}
 
@@ -70,10 +69,10 @@ public class HibernateCourseDAO implements CourseDAO{
 	}
 
 	@Override
-	public int saveCourse(Course course) {
+	public int saveCourse(Course course) {		
 		System.out.println("saveCourse ");
 	    Session session = sessionFactory.getCurrentSession();
-        return (Integer) session.save(course);
+        return ((Integer) session.save(course)).intValue(); 
 	}
 
 }

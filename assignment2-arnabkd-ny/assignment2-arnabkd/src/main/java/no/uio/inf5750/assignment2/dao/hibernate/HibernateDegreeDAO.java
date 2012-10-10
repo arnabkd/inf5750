@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,8 +32,10 @@ public class HibernateDegreeDAO implements DegreeDAO {
 	}
 	
 	@Override
-	public void delDegree(Degree arg0) {
-		// TODO Auto-generated method stub
+	public void delDegree(Degree degree) {
+		Session session = sessionFactory.getCurrentSession();
+		if(session.get(Course.class, degree.getId()) != null)
+			session.delete(degree);
 
 	}
 
@@ -44,43 +47,27 @@ public class HibernateDegreeDAO implements DegreeDAO {
 	}
 
 	@Override
-	public Degree getDegree(int arg0) {
-		Collection<Degree> allDegrees = getAllDegrees();
-		Degree match = null;
-
-		for (Degree degree: allDegrees) {
-			if (degree.getId() == arg0) {
-				match = degree;
-				break; // we found the student we were looking for
-			}
-		}
-
-		return match;
+	public Degree getDegree(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Degree.class);
+		criteria.add(Restrictions.eq("id", id));
+		
+		return (Degree) criteria.uniqueResult();
 	}
 
 	@Override
-	public Degree getDegreeByType(String arg0) {
-		Collection<Degree> allDegrees = getAllDegrees();
-		Degree match = null;
-
-		for (Degree degree: allDegrees) {
-			if (degree.getType().equals(arg0)) {
-				match = degree;
-				break; // we found the student we were looking for
-			}
-		}
-
-		return match;
+	public Degree getDegreeByType(String type) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Degree.class);
+		criteria.add(Restrictions.eq("type", type));
+		
+		return (Degree) criteria.uniqueResult();
 	}
 
 	@Override
 	public int saveDegree(Degree degree) {
         Session session = sessionFactory.getCurrentSession();        
-        //Transaction transaction = session.beginTransaction();        
-        int id = (Integer) session.save(degree.getId());        
-        //transaction.commit(); // No error handling considered
-        
-        return id;
+        return (Integer) session.save(degree);      
 	}
 
 }

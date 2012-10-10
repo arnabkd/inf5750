@@ -12,15 +12,11 @@
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/event</property>
 
-		<!-- <property name="hibernate.connection.driver_class">org.postgresql.Driver</property> 
-			<property name="hibernate.connection.url">jdbc:postgresql:eventmanager</property> -->
-
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">admin</property>
 
 		<!-- SQL dialect -->
 
-		<!-- <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property> -->
 
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 

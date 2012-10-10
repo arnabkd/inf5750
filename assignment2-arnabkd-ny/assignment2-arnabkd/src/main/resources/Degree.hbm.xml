@@ -4,13 +4,13 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="no.uio.inf5750.assignment2.model.Degree" table="course">
+	<class name="no.uio.inf5750.assignment2.model.Degree" table="degree">
 
-		<id name="id" type="integer" column="degree_id">
+		<id name="id"  column="degree_id">
 			<generator class="native" />
 		</id>
 
-		<property name="type" type="string" not-null="true" />
+		<property name="type" not-null="true" />
 
 		<!-- Collection mapping -->
 

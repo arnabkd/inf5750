@@ -57,6 +57,7 @@
 			value="jdbc:h2:mem:eventmanager;DB_CLOSE_ON_EXIT=FALSE" />
 		<property name="user" value="sa" />
 		<property name="password" value="" />
+		
 	</bean>
 
 
