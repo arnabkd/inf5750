@@ -42,9 +42,15 @@ public class DefaultStudentSystem implements StudentSystem {
 	}
 
 	@Override
-	public void addAttendantToCourse(int courseID, int studentID) {
-		courseDAO.getCourse(courseID).getAttendants().add(studentDAO.getStudent(studentID));
-		studentDAO.getStudent(studentID).getCourses().add(courseDAO.getCourse(courseID));
+	public void addAttendantToCourse(int courseId, int studentId) {
+		Course course = courseDAO.getCourse(courseId);
+		Student student = studentDAO.getStudent(studentId);
+		
+		course.getAttendants().add(student);
+		student.getCourses().add(course);
+		
+		courseDAO.saveCourse(course);
+		studentDAO.saveStudent(student);
 	}
 
 	@Override
@@ -59,12 +65,20 @@ public class DefaultStudentSystem implements StudentSystem {
 
 	@Override
 	public void addDegreeToStudent(int studentId, int degreeId) {
-		studentDAO.getStudent(studentId).getDegrees().add(degreeDAO.getDegree(degreeId));
+		Degree degree = degreeDAO.getDegree(degreeId);
+		Student student = studentDAO.getStudent(studentId);
+		
+		student.getDegrees().add(degree);
+		studentDAO.saveStudent(student);
 	}
 
 	@Override
 	public void addRequiredCourseToDegree(int degreeId, int courseId) {
-		degreeDAO.getDegree(degreeId).getRequiredCourses().add(courseDAO.getCourse(courseId));
+		Degree degree = degreeDAO.getDegree(degreeId);
+		Course course = courseDAO.getCourse(courseId);
+		
+		degree.getRequiredCourses().add(course);
+		degreeDAO.saveDegree(degree);
 	}
 
 	@Override
@@ -139,8 +153,14 @@ public class DefaultStudentSystem implements StudentSystem {
 
 	@Override
 	public void removeAttendantFromCourse(int courseId, int studentId) {
-		studentDAO.getStudent(studentId).getCourses().remove(courseDAO.getCourse(courseId));
-		courseDAO.getCourse(courseId).getAttendants().remove(studentDAO.getStudent(studentId));
+		Course course = courseDAO.getCourse(courseId);
+		Student student = studentDAO.getStudent(studentId);
+		
+		course.getAttendants().remove(student);
+		student.getCourses().remove(course);
+		
+		courseDAO.saveCourse(course);
+		studentDAO.saveStudent(student);
 	}
 
 	@Override
@@ -160,17 +180,27 @@ public class DefaultStudentSystem implements StudentSystem {
 
 	@Override
 	public void updateCourse(int courseId, String courseCode, String courseName) {
-				
+		Course course = courseDAO.getCourse(courseId);
+		course.setCourseCode(courseCode);
+		course.setName(courseName);
+		
+		courseDAO.saveCourse(course);
 	}
 
 	@Override
 	public void updateDegree(int degreeId, String type) {
-
+		Degree degree = degreeDAO.getDegree(degreeId);
+		degree.setType(type);
+		
+		degreeDAO.saveDegree(degree);
 	}
 
 	@Override
 	public void updateStudent(int studentId, String name) {
-
+		Student student = studentDAO.getStudent(studentId);
+		student.setName(name);
+		
+		studentDAO.saveStudent(student);
 	}
 
 }

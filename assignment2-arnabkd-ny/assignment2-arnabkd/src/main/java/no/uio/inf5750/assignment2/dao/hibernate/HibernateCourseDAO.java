@@ -28,7 +28,6 @@ public class HibernateCourseDAO implements CourseDAO{
 	
 	@Override
 	public void delCourse(Course course) {
-		System.out.println("delete course");
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(course);
 	}
@@ -36,7 +35,6 @@ public class HibernateCourseDAO implements CourseDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Course> getAllCourses() {
-		System.out.println("get all courses");
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Course.class);
 		return (Collection<Course>) criteria.list();		
@@ -44,14 +42,12 @@ public class HibernateCourseDAO implements CourseDAO{
 
 	@Override
 	public Course getCourse(int id) {
-		System.out.println("get course");
 		Session session = sessionFactory.getCurrentSession();
 		return (Course) session.get(Course.class, id);	
 	}
 
 	@Override
 	public Course getCourseByCourseCode(String courseCode) {
-		System.out.println("get course by coursecode");
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Course.class);
 		criteria.add(Restrictions.eq("courseCode", courseCode));
@@ -60,7 +56,6 @@ public class HibernateCourseDAO implements CourseDAO{
 
 	@Override
 	public Course getCourseByName(String courseName) {
-		System.out.println("get course by name");
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Course.class);
 		criteria.add(Restrictions.eq("name", courseName));
@@ -70,9 +65,9 @@ public class HibernateCourseDAO implements CourseDAO{
 
 	@Override
 	public int saveCourse(Course course) {		
-		System.out.println("saveCourse ");
 	    Session session = sessionFactory.getCurrentSession();
-        return ((Integer) session.save(course)).intValue(); 
+	    session.saveOrUpdate(course);
+	    return course.getId();
 	}
 
 }

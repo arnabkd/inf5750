@@ -10,8 +10,8 @@
 			<generator class="native" />
 		</id>
 
-		<property name="courseCode" unique="true" not-null="true"/>
-		<property name="name" unique="true" not-null="true"/>
+		<property name="courseCode" />
+		<property name="name" />
 
 		<!-- Collection mapping -->
 

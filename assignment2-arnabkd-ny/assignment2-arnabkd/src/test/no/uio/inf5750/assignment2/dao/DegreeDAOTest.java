@@ -57,10 +57,7 @@ public class DegreeDAOTest {
 		assertNotNull(degreeDAO.getDegree(degree.getId()));
 	}
 
-	/**
-	 * Test method for
-	 * {@link no.uio.inf5750.assignment2.dao.DegreeDAO#getDegree(int)}.
-	 */
+
 	@Test
 	public void testGetDegree() {
 		Degree degree = new Degree("Test degree");
@@ -98,17 +95,13 @@ public class DegreeDAOTest {
 		assertTrue(degreeDAO.getAllDegrees().containsAll(degrees));
 	}
 
-	/**
-	 * Test method for
-	 * {@link no.uio.inf5750.assignment2.dao.DegreeDAO#delDegree(no.uio.inf5750.assignment2.model.Degree)}
-	 * .
-	 */
+
 	@Test
 	public void testDelDegree() {
 		Degree degree = new Degree("Test degree");
 		degreeDAO.saveDegree(degree);
 		degreeDAO.delDegree(degree);
-		assertNull(degreeDAO.getDegreeByType("Test degree"));		
+		assertNull(degreeDAO.getDegree(degree.getId()));		
 	}
 
 }
