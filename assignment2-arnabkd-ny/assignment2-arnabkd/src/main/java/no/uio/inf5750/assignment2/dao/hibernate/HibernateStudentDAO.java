@@ -60,8 +60,8 @@ public class HibernateStudentDAO implements StudentDAO{
 
 	@Override
 	public void delStudent(Student student) {
-		// TODO Auto-generated method stub
-		
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(student);
 	}
 
 }

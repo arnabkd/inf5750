@@ -30,10 +30,10 @@ public class HibernateCourseDAO implements CourseDAO{
 	public void delCourse(Course course) {
 		System.out.println("delete course");
 		Session session = sessionFactory.getCurrentSession();
-		if(session.get(Course.class, course.getId()) != null)
-			session.delete(course);
+		session.delete(course);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Course> getAllCourses() {
 		System.out.println("get all courses");

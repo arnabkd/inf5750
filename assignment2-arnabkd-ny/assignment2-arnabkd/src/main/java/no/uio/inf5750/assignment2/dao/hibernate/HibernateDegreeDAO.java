@@ -34,9 +34,7 @@ public class HibernateDegreeDAO implements DegreeDAO {
 	@Override
 	public void delDegree(Degree degree) {
 		Session session = sessionFactory.getCurrentSession();
-		if(session.get(Course.class, degree.getId()) != null)
-			session.delete(degree);
-
+		session.delete(degree);
 	}
 
 	@Override
